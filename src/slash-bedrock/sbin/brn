@@ -66,13 +66,12 @@ fatal_error() {
 	exec sh
 }
 
-kill_plymouth() {
+
+setup_term() {
 	# Ensure plymouth isn't running, as it will fight with brn over control
 	# of the terminal.
 	killall -9 -f plymouthd
-}
 
-setup_term() {
 	# Plymouth will lock the terminal settings.  This causes the following
 	# commands to fail if not unlocked.
 	/bedrock/libexec/manage_tty_lock unlock
@@ -438,7 +437,6 @@ passed_strata=$(grep -Eo 'strata=[^ ]*' /proc/cmdline | sed s/strata=//)
 passed_init=$(grep -Eo 'strata_init=[^ ]*' /proc/cmdline | sed s/strata_init=//)
 if [ -z "$passed_strata" ]
 then
-	kill_plymouth
 	get_init_choice
 	i=$?
 	if [ "$i" -gt 0 ]
