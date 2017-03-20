@@ -446,8 +446,7 @@ then
 	else
 		init_stratum=$default_stratum
 		init_cmd=$default_cmd
-fi
-
+    fi
 else
 	init_stratum=$passed_strata
 	init_cmd=$passed_init
